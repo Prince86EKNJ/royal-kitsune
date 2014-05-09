@@ -59,6 +59,11 @@ F.insertWithNextId = function(table, data)
 	return nextId;
 };
 
+F.renderInJavaScript = function(funcs)
+{
+	console.log(funcs);
+}
+
 var onReplSessionEnd = function()
 {
 	console.log("=== END OF LINE ===");
@@ -66,9 +71,16 @@ var onReplSessionEnd = function()
 
 scratch(T, F);
 
-var repl = require("repl");
-var replSession = repl.start("> ");
-replSession.on("exit", onReplSessionEnd);
-var context = replSession.context;
-context.T = T;
-context.F = F;
+// Start REPL if run with "-r" option
+var replOption = process.argv[2];
+var startRepl = replOption != undefined && replOption == "-r";
+
+if(startRepl)
+{
+	var repl = require("repl");
+	var replSession = repl.start("> ");
+	replSession.on("exit", onReplSessionEnd);
+	var context = replSession.context;
+	context.T = T;
+	context.F = F;
+}
