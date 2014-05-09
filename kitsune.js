@@ -1,3 +1,4 @@
+var _ = require("lib/lodash");
 var taffyObj = require("lib/taffy");
 var taffy = taffyObj.taffy;
 var scratch = require("scratch");
@@ -61,7 +62,10 @@ F.insertWithNextId = function(table, data)
 
 F.renderInJavaScript = function(funcs)
 {
-	console.log(funcs);
+	_.each(funcs, function(func)
+	{
+		console.log(func);
+	});
 }
 
 var onReplSessionEnd = function()

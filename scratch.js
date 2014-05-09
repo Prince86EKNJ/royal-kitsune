@@ -15,7 +15,7 @@ module.exports = function(T, F)
 	F.insertWithNextId(T.name, { name: "hime" });
 	F.insertWithNextId(T.name, { name: "james" });
 
-	F.renderInJavaScript(T.func().get());
+	F.renderInJavaScript(T.name().get());
 
 	console.log("=== END SCRATCH ===");
 };
