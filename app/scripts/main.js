@@ -9,7 +9,7 @@ require.config(
 	}
 });
 
-require(["kitsune"], function(kitsune)
+require(["lodash-mixins", "kitsune"], function(_, kitsune)
 {
 	kitsune();
 });
