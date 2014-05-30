@@ -1,5 +1,7 @@
 require.config(
 {
+	baseUrl: "kitsune",
+
 	shim:
 	{
 		'taffy':
