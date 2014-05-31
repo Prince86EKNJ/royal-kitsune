@@ -1,7 +1,5 @@
 require.config(
 {
-	baseUrl: "kitsune",
-
 	shim:
 	{
 		'taffy':
@@ -11,7 +9,7 @@ require.config(
 	}
 });
 
-require(["lodash-mixins", "kitsune"], function(_, kitsune)
+require(["kitsune/kitsune"], function(kitsune)
 {
 	kitsune();
 });
