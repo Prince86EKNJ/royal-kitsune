@@ -9,7 +9,13 @@ require.config(
 	}
 });
 
-require(["kitsune/kitsune"], function(kitsune)
+require(["kitsune/kitsune", "royal-lodash"], function(kitsune, _)
 {
-	kitsune();
+	var exports = kitsune();
+
+	// Attach exports to global scope (window)
+	_.each(exports, function(value, key)
+	{
+		window[key] = value;
+	});
 });

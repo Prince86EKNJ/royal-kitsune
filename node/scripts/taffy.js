@@ -1,9 +1,4 @@
-console.log(require);
-
-var taffyBase = require("taffy-base");
-
-define(function()
+define(["taffydb"], function(taffydb)
 {
-	console.log(taffyBase);
-	return taffyBase;
+	return taffydb.taffy;
 });

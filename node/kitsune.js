@@ -8,7 +8,7 @@ var vm = require("vm");
 
 // Load and Run Kitsune
 var kitsune = requirejs("kitsune/kitsune");
-kitsune();
+var exports = kitsune();
 
 // Setup and Run REPL
 var evalFunc = function(cmd, context, filename, callback)
@@ -26,10 +26,17 @@ var evalFunc = function(cmd, context, filename, callback)
 	}
 
 	callback(err, result);
-}
+};
 
 var replSession = repl.start(
 {
 	eval: evalFunc
 });
 replSession.context.requirejs = requirejs;
+
+// Attach the exports to the REPL context
+var _  = requirejs("royal-lodash");
+_.each(exports, function(value, key)
+{
+	replSession.context[key] = value;
+});

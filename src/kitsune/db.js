@@ -7,7 +7,8 @@ define(["royal-lodash", "taffy"], function(_, taffy)
 	_.each(tableNames, function(tableName)
 	{
 		db[tableName] = taffy([]);
-		db[tableName].store(tableName);
+		// FIXME: Not compatiable with NodeJS
+		//db[tableName].store(tableName);
 	});
 
 	// DB Functions

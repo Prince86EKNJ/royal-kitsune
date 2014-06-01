@@ -14,11 +14,7 @@ define(["royal-lodash", "kitsune/db"], function(_, db)
 			F: F
 		};
 
-		// TODO: Make this configuratble for NodeJS and Browsers
-		_.each(exports, function(value, key)
-		{
-			window[key] = value;
-		});
+		return exports;
 	};
 
 	return kitsune;
