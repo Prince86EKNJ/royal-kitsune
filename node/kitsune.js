@@ -1,3 +1,6 @@
+var storage = require('dom-storage');
+global.localStorage = new storage('./db.json', { strict: false, ws: '  ' });
+
 var requirejs = require("requirejs");
 requirejs.config({
 	baseUrl: "scripts"
