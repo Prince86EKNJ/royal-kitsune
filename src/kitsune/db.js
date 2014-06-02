@@ -1,24 +1,33 @@
 define(["royal-lodash", "taffy"], function(_, taffy)
 {
-	var tableIds = {
-		entity: "",
-		entityMap: "",
-		name: "",
-		func: ""
-	};
-
 	// Create / Load each table
 
 	var tables = {};
 
 	var db = {
-		tables: tables
+		entityTypeId: "9099e7904c6325ef6aed42e59bba77d6abd745b8",
+		tables: tables,
+		systemTables: {}
 	};
+
+	var tableIds = {
+		entity: "533de46c353ad84bb72fcaa7de0d310a4af36524",
+		entityMap: "960981be07d81e4146d04dc7e80038f91fb51d7b",
+		name: "7d070ad0991ce6d0167b1c6dc1d4ab8934a4a22c"
+	};
+
+	db.tableIds = tableIds;
 
 	_.each(tableIds, function(tableId, tableName)
 	{
-		tables[tableName] = taffy([]);
-		tables[tableName].store(tableName);
+		var newTableId = "T_"+tableId;
+
+		var table = taffy([]);
+		table.store(newTableId);
+
+		tables[newTableId] = table; 
+
+		db.systemTables[tableName] = table;
 	});
 
 	// DB Functions
@@ -39,14 +48,19 @@ define(["royal-lodash", "taffy"], function(_, taffy)
 		return data;
 	};
 
-	db.getTableById = function(tableId)
+	db.lookupSystemTableId = function(tableName)
 	{
-		return tables[tableId];
+		return tableIds[tableName];
+	}
+
+	db.getTable = function(tableId)
+	{
+		return tables["T_"+tableId];
 	};
 
 	db.insertWithNextIdB = function(tableId, data)
 	{
-		var table = db.getTableById(tableId);
+		var table = db.getTable(tableId);
 
 		var nextId = db.getNextId(table);
 		data.id = nextId;
@@ -55,12 +69,22 @@ define(["royal-lodash", "taffy"], function(_, taffy)
 		return data;
 	};
 
-	db.insertEntity = function()
+	db.insertEntity = function(typeId)
 	{
 		var hash = _.buildHash(20);
-		var data = db.insertWithNextId(tables.entity, { hash: hash });
+
+		var entityTableId = db.lookupSystemTableId("entity");
+		var entityTable = db.getTable(entityTableId);
+
+		var data = { id: hash, type: typeId };
+		entityTable.insert(data);
 
 		return data;
+	};
+
+	db.insertEntityType = function()
+	{
+		return db.insertEntity(entityTypeId);
 	};
 
 	db.insertEntityWithData = function(table, data)
