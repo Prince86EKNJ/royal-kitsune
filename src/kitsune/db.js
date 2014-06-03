@@ -85,6 +85,13 @@ define(["royal-lodash", "taffy"], function(_, taffy)
 		return result;
 	};
 
+	db.mapEntities = function(head, tail)
+	{
+		var data = { head: head, tail: tail };
+		var result = db.insertEntityWithData(tableIds.entityMap, data);
+		return result;
+	};
+
 	// DB Helper Functions
 	db.removeAll = function(password)
 	{
