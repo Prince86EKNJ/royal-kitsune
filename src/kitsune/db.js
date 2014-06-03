@@ -17,6 +17,7 @@ define(["royal-lodash", "taffy"], function(_, taffy)
 
 	db.tableIds = tableIds;
 
+	// Load tables
 	_.each(tableIds, function(tableId, tableName)
 	{
 		var newTableId = "T_"+tableId;
@@ -24,10 +25,15 @@ define(["royal-lodash", "taffy"], function(_, taffy)
 		var table = taffy([]);
 		table.store(newTableId);
 
-		tables[newTableId] = table; 
+		tables[newTableId] = table;
 
 		db.systemTables[tableName] = table;
 	});
+
+	// System Tables
+	var entityTable = db.systemTables.entity;
+	var entityMapTable = db.systemTables.entityMap;
+	var nameTable = db.systemTables.nameTable;
 
 	// DB Functions
 	db.getTable = function(tableId)
@@ -57,8 +63,6 @@ define(["royal-lodash", "taffy"], function(_, taffy)
 	{
 		var hash = _.buildHash(20);
 
-		var entityTable = db.getTable(tableIds.entity);
-
 		var data = { id: hash, type: typeId };
 		entityTable.insert(data);
 
@@ -75,7 +79,6 @@ define(["royal-lodash", "taffy"], function(_, taffy)
 
 	db.getOrInsertName = function(name)
 	{
-		var nameTable = db.getTable(tableIds.name);
 		var result = nameTable({ name: name }).first();
 		if(!result)
 		{
@@ -92,12 +95,26 @@ define(["royal-lodash", "taffy"], function(_, taffy)
 		return result;
 	};
 
+	db.getEntitiesByName = function(name)
+	{
+		var nameEntityId = nameTable({ name: name }).first().id;
+		console.log(nameEntityId);
+
+		var mappings = entityMapTable({ tail: nameEntityId }).get();
+		var mappingIds = _.pluck(mappings, "head");
+		console.log(mappingIds);
+
+		var result = entityTable({ id: mappingIds }).get();
+
+		return result;
+	};
+
 	// DB Helper Functions
 	db.removeAll = function(password)
 	{
 		if(password != "removeMe")
 		{
-			return false;
+			throw "Incorrect password, please try again...";
 		}
 
 		_.each(tableIds, function(tableId)
