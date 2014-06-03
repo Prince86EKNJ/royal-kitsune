@@ -13,6 +13,17 @@ var vm = require("vm");
 var kitsune = requirejs("kitsune/kitsune");
 var exports = kitsune();
 
+var _  = requirejs("royal-lodash");
+var hasMacro = function(cmd)
+{
+	return _.indexOf(cmd.trim(), "@") == 0;
+};
+
+var executeMacro = function(cmd, context, filename)
+{
+	return "!!!" + cmd.substring(1, cmd.length-1) + "!!!";
+};
+
 // Setup and Run REPL
 var evalFunc = function(cmd, context, filename, callback)
 {
@@ -21,7 +32,14 @@ var evalFunc = function(cmd, context, filename, callback)
 
 	try
 	{
-		result = vm.runInContext(cmd, context, filename);
+		if(hasMacro(cmd))
+		{
+			result = executeMacro(cmd, context, filename);
+		}
+		else
+		{
+			result = vm.runInContext(cmd, context, filename);
+		}
 	}
 	catch(e)
 	{
@@ -38,7 +56,6 @@ var replSession = repl.start(
 replSession.context.requirejs = requirejs;
 
 // Attach the exports to the REPL context
-var _  = requirejs("royal-lodash");
 _.each(exports, function(value, key)
 {
 	replSession.context[key] = value;
