@@ -21,7 +21,7 @@ var hasMacro = function(cmd)
 
 var executeMacro = function(cmd, context, filename)
 {
-	return "!!!" + cmd.substring(1, cmd.length-1) + "!!!";
+	return context.db.getEntitiesByName(cmd);
 };
 
 // Setup and Run REPL
@@ -34,7 +34,8 @@ var evalFunc = function(cmd, context, filename, callback)
 	{
 		if(hasMacro(cmd))
 		{
-			result = executeMacro(cmd, context, filename);
+			var cleanCmd = cmd.substring(1, cmd.length-1);
+			result = executeMacro(cleanCmd, context, filename);
 		}
 		else
 		{

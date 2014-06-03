@@ -33,7 +33,7 @@ define(["royal-lodash", "taffy"], function(_, taffy)
 	// System Tables
 	var entityTable = db.systemTables.entity;
 	var entityMapTable = db.systemTables.entityMap;
-	var nameTable = db.systemTables.nameTable;
+	var nameTable = db.systemTables.name;
 
 	// DB Functions
 	db.getTable = function(tableId)
@@ -98,11 +98,9 @@ define(["royal-lodash", "taffy"], function(_, taffy)
 	db.getEntitiesByName = function(name)
 	{
 		var nameEntityId = nameTable({ name: name }).first().id;
-		console.log(nameEntityId);
 
 		var mappings = entityMapTable({ tail: nameEntityId }).get();
 		var mappingIds = _.pluck(mappings, "head");
-		console.log(mappingIds);
 
 		var result = entityTable({ id: mappingIds }).get();
 
