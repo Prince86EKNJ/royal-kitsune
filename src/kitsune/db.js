@@ -1,7 +1,6 @@
 define(["royal-lodash", "taffy"], function(_, taffy)
 {
 	// Create / Load each table
-
 	var tables = {};
 
 	var db = {
@@ -31,34 +30,12 @@ define(["royal-lodash", "taffy"], function(_, taffy)
 	});
 
 	// DB Functions
-	db.getNextId = function(table)
-	{
-		var id = table().max("id") + 1;
-		id = id == null ? 1 : id;
-
-		return id;
-	};
-
-	db.insertWithNextId = function(table, data)
-	{
-		var nextId = db.getNextId(table);
-		data.id = nextId;
-		table.insert(data);
-
-		return data;
-	};
-
-	db.lookupSystemTableId = function(tableName)
-	{
-		return tableIds[tableName];
-	}
-
 	db.getTable = function(tableId)
 	{
 		return tables["T_"+tableId];
 	};
 
-	db.insertWithNextIdB = function(tableId, data)
+	db.insertWithNextId = function(tableId, data)
 	{
 		var table = db.getTable(tableId);
 
@@ -69,12 +46,18 @@ define(["royal-lodash", "taffy"], function(_, taffy)
 		return data;
 	};
 
+	db.insert = function(tableId, data)
+	{
+		var table = db.getTable(tableId);
+		table.insert(data);
+		return data;
+	};
+
 	db.insertEntity = function(typeId)
 	{
 		var hash = _.buildHash(20);
 
-		var entityTableId = db.lookupSystemTableId("entity");
-		var entityTable = db.getTable(entityTableId);
+		var entityTable = db.getTable(tableIds.entity);
 
 		var data = { id: hash, type: typeId };
 		entityTable.insert(data);
@@ -82,27 +65,23 @@ define(["royal-lodash", "taffy"], function(_, taffy)
 		return data;
 	};
 
-	db.insertEntityType = function()
+	db.insertEntityWithData = function(tableId, data)
 	{
-		return db.insertEntity(entityTypeId);
-	};
-
-	db.insertEntityWithData = function(table, data)
-	{
-		var entity = db.insertEntity();
-		data.entityId = entity.hash;
-		var result = db.insertWithNextId(table, data);
-		// FIXME: "type" on "entity" shouldn't be null
-		db.tables.entity({ hash: data.hash }).update({ type: null });
+		var entity = db.insertEntity(tableId);
+		data.id = entity.id;
+		var result = db.insert(tableId, data);
 		return result;
 	};
 
-	db.insertEntityWithDataB = function(tableId, data)
+	db.getOrInsertName = function(name)
 	{
-		var entity = db.insertEntity();
-		data.entityId = entity.hash;
-		var result = db.insertWithNextIdB(tableId, data);
-		db.tables.entity({ hash: data.hash }).update({ type: tableId });
+		var nameTable = db.getTable(tableIds.name);
+		var result = nameTable({ name: name }).first();
+		if(!result)
+		{
+			result = db.insertEntityWithData(tableIds.name, { name: name });
+		}
+
 		return result;
 	};
 
