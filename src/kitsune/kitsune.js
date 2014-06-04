@@ -8,7 +8,7 @@ define(["royal-lodash", "kitsune/db"], function(_, db)
 		var exports =
 		{
 			db: db,
-			T: db.tables,
+			t: db.tables,
 			lodash: _
 		};
 

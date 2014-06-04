@@ -21,7 +21,16 @@ var hasMacro = function(cmd)
 
 var executeMacro = function(cmd, context, filename)
 {
-	return context.db.getEntitiesByName(cmd);
+	var entities = context.db.getEntitiesByName(cmd);
+
+	// Populate "r"
+	context.r.named = entities;
+	context.r.first = entities[0];
+	context.r.id = context.r.first.id;
+	context.r.ids = _.pluck(entities, "id");
+	context.r.last = entities[entities.length-1];
+
+	return entities;
 };
 
 // Setup and Run REPL
@@ -54,10 +63,14 @@ var replSession = repl.start(
 {
 	eval: evalFunc
 });
-replSession.context.requirejs = requirejs;
+var context = replSession.context;
+context.requirejs = requirejs;
 
 // Attach the exports to the REPL context
 _.each(exports, function(value, key)
 {
-	replSession.context[key] = value;
+	context[key] = value;
 });
+
+// Add "result" variable to context to hold macro responses
+context.r = {};
