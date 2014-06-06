@@ -8,6 +8,6 @@ describe("kitsune/kitsune", function()
 {
 	it("is a function", function()
 	{
-		expect(typeof kitsune).to.equal("object");
+		expect(typeof kitsune).to.equal("function");
 	});
 });
