@@ -3,6 +3,12 @@
 	"version": "0.0.1",
 	"description": "Code Generation Language/Framework",
 	"author": "Edward Nicholes Jr. <Prince86EKNJ@gmail.com>",
+	"repository":
+	{
+		"type": "git",
+		"url": "https://github.com/Prince86EKNJ/royal-kitsune.git"
+
+	}
 	"scripts":
 	{
 		"test": "echo \"This is a test\""
