@@ -1,4 +1,4 @@
-define(["royal-lodash", "taffy"], function(_, taffy)
+var module.exports = function(_, taffy)
 {
 	// Create / Load each table
 	var tables = {};

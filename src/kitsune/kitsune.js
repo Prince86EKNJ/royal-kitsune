@@ -1,4 +1,4 @@
-define(["royal-lodash", "kitsune/db"], function(_, db)
+module.exports = function(_, db)
 {
 	var kitsune = function()
 	{
@@ -16,4 +16,4 @@ define(["royal-lodash", "kitsune/db"], function(_, db)
 	};
 
 	return kitsune;
-});
+};
