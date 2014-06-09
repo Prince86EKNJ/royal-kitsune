@@ -13,6 +13,10 @@
 	{
 		"test": "mocha"
 	},
+	"dependencies":
+	{
+		"taffydb": "2.7.2"
+	},
 	"devDependencies":
 	{
 		"chai": "1.9.1",
