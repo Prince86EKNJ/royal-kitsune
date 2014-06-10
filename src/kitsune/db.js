@@ -1,4 +1,4 @@
-var module.exports = function(_, taffy)
+module.exports = function(_, taffy)
 {
 	// Create / Load each table
 	var tables = {};
@@ -124,4 +124,4 @@ var module.exports = function(_, taffy)
 	};
 
 	return db;
-});
+};

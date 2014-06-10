@@ -1,19 +1,23 @@
 var storage = require('dom-storage');
 global.localStorage = new storage('./db.json', { strict: false, ws: '  ' });
 
-var requirejs = require("requirejs");
-requirejs.config({
-	baseUrl: "scripts"
-});
-
 var repl = require("repl");
 var vm = require("vm");
 
+var _ = require("./scripts/lodash");
+var royalLodash = require("./scripts/royal-lodash");
+_ = royalLodash(_);
+
+var taffy = require("taffydb");
+
+var dbModule = require("./scripts/kitsune/db");
+var db = dbModule(_, taffy.taffy);
+
 // Load and Run Kitsune
-var kitsune = requirejs("kitsune/kitsune");
+var kitsuneModule = require("./scripts/kitsune/kitsune");
+var kitsune = kitsuneModule(_, db);
 var exports = kitsune();
 
-var _  = requirejs("royal-lodash");
 var hasMacro = function(cmd)
 {
 	return _.indexOf(cmd.trim(), "@") == 0;
@@ -64,7 +68,7 @@ var replSession = repl.start(
 	eval: evalFunc
 });
 var context = replSession.context;
-context.requirejs = requirejs;
+context.exports = exports;
 
 // Attach the exports to the REPL context
 _.each(exports, function(value, key)
