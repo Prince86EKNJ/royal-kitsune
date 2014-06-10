@@ -4,7 +4,7 @@ global.localStorage = new storage('./db.json', { strict: false, ws: '  ' });
 var repl = require("repl");
 var vm = require("vm");
 
-var _ = require("./scripts/lodash");
+var _ = require("lodash");
 var royalLodash = require("./scripts/royal-lodash");
 _ = royalLodash(_);
 

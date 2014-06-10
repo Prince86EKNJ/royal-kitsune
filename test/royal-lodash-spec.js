@@ -1,4 +1,4 @@
-var _ = require("../lib/lodash");
+var _ = require("lodash");
 var royalLodash = require("../src/royal-lodash");
 
 _ = royalLodash(_);
