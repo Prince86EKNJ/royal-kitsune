@@ -15,7 +15,8 @@
 	},
 	"dependencies":
 	{
-		"taffydb": "2.7.2"
+		"taffydb": "2.7.2",
+		"dom-storage": "2.0.1"
 	},
 	"devDependencies":
 	{
