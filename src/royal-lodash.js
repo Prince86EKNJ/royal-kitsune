@@ -1,3 +1,5 @@
+var _ = require("lodash");
+
 module.exports = function(_)
 {
 	_.mixin(
@@ -24,4 +26,4 @@ module.exports = function(_)
 	});
 
 	return _;
-};
+}(_);

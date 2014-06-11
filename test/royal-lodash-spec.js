@@ -1,10 +1,7 @@
-var _ = require("lodash");
-var royalLodash = require("../src/royal-lodash");
-
-_ = royalLodash(_);
-
 var chai = require("chai");
 var expect = chai.expect;
+
+var _ = require("./src/royal-lodash");
 
 describe("royal-lodash", function()
 {
