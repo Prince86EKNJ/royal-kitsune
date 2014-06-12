@@ -1,5 +1,5 @@
 var storage = require('dom-storage');
-global.localStorage = new storage('./db.json', { strict: false, ws: '  ' });
+global.localStorage = new storage('./data/db.json', { strict: false, ws: '  ' });
 
 var repl = require("repl");
 var vm = require("vm");

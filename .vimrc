@@ -1,4 +1,4 @@
-command! SaveAndExecute wall | !node app/kitsune.js
+command! SaveAndExecute wall | !node index.js
 noremap \x :SaveAndExecute<CR>
 
 command! SaveAndRunTests wall | !node_modules/.bin/mocha
