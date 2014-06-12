@@ -4,12 +4,8 @@ global.localStorage = new storage('./data/db.json', { strict: false, ws: '  ' })
 var repl = require("repl");
 var vm = require("vm");
 
+var db = require("./lib/db")();
 var _ = require("./lib/royal-lodash");
-
-var taffy = require("taffydb");
-
-var dbModule = require("./lib/db");
-var db = dbModule(_, taffy.taffy);
 
 // Assemble exports
 var exports =
