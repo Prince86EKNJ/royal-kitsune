@@ -8,7 +8,7 @@ var _ = require("./lib/royal-lodash");
 
 var taffy = require("taffydb");
 
-var dbModule = require("./lib/kitsune/db");
+var dbModule = require("./lib/db");
 var db = dbModule(_, taffy.taffy);
 
 // Assemble exports
