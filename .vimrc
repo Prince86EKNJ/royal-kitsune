@@ -1,10 +1,10 @@
 command! SaveAndExecute wall | !node index.js
 noremap \x :SaveAndExecute<CR>
 
-command! SaveAndRunTests wall | !node_modules/.bin/mocha
+command! SaveAndRunTests wall | !npm test
 noremap \t :SaveAndRunTests<CR>
 
-command! BuildDefine normal adefine("", function()<CR>{<CR>});<ESC>kk^f"
+command! BuildDefine normal adescribe("", function()<CR>{<CR>});<ESC>kk^f"
 noremap \d :BuildDefine<CR>
 
 command! BuildIt normal ait("", function()<CR>{<CR>});<ESC>kk^f"
