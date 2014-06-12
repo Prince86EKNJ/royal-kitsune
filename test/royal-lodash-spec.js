@@ -1,7 +1,7 @@
 var chai = require("chai");
 var expect = chai.expect;
 
-var _ = require("./src/royal-lodash");
+var _ = require("../lib/royal-lodash");
 
 describe("royal-lodash", function()
 {

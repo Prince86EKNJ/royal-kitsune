@@ -4,17 +4,15 @@ global.localStorage = new storage('./db.json', { strict: false, ws: '  ' });
 var repl = require("repl");
 var vm = require("vm");
 
-var _ = require("lodash");
-var royalLodash = require("./scripts/royal-lodash");
-_ = royalLodash(_);
+var _ = require("./lib/royal-lodash");
 
 var taffy = require("taffydb");
 
-var dbModule = require("./scripts/kitsune/db");
+var dbModule = require("./lib/kitsune/db");
 var db = dbModule(_, taffy.taffy);
 
 // Load and Run Kitsune
-var kitsuneModule = require("./scripts/kitsune/kitsune");
+var kitsuneModule = require("./lib/kitsune/kitsune");
 var kitsune = kitsuneModule(_, db);
 var exports = kitsune();
 
