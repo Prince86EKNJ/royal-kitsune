@@ -11,10 +11,13 @@ var taffy = require("taffydb");
 var dbModule = require("./lib/kitsune/db");
 var db = dbModule(_, taffy.taffy);
 
-// Load and Run Kitsune
-var kitsuneModule = require("./lib/kitsune/kitsune");
-var kitsune = kitsuneModule(_, db);
-var exports = kitsune();
+// Assemble exports
+var exports =
+{
+	db: db,
+	t: db.tables,
+	lodash: _
+};
 
 var hasMacro = function(cmd)
 {
@@ -61,10 +64,18 @@ var evalFunc = function(cmd, context, filename, callback)
 	callback(err, result);
 };
 
+console.log("=== Royal Kitsune ===");
 var replSession = repl.start(
 {
 	eval: evalFunc
 });
+
+replSession.on("exit", function()
+{
+	console.log("");
+	console.log("=== END OF LINE ===");
+});
+
 var context = replSession.context;
 context.exports = exports;
 
