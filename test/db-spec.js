@@ -116,4 +116,24 @@ describe("db", function()
 			expect(entities[0]).to.have.property("id", entityTableId);
 		});
 	});
+
+	describe("removeAll(password)", function()
+	{
+		it("removes all data from all tables when given the proper password", function()
+		{
+			db.removeAll("removeMe");
+
+			expect(entityTable().count()).to.equal(0);
+			expect(entityMapTable().count()).to.equal(0);
+			expect(nameTable().count()).to.equal(0);
+		});
+
+		it("throws an exception when the wrong password is given", function()
+		{
+			expect(function()
+			{
+				db.removeAll("wrongPassword");
+			}).to.throw("Incorrect password, please try again...");
+		});
+	});
 });
