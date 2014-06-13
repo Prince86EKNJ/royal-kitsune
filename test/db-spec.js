@@ -11,6 +11,9 @@ describe("db", function()
 	var entityTableId = db.tableIds.entity;
 	var entityTable = db.getTable(entityTableId);
 
+	var entityMapTableId = db.tableIds.entityMap;
+	var entityMapTable = db.getTable(entityMapTableId);
+
 	var nameTableId = db.tableIds.name;
 	var nameTable = db.getTable(nameTableId);
 
@@ -81,6 +84,21 @@ describe("db", function()
 
 			expect(nameResults.length).to.equal(0);
 			expect(newName.name).to.equal("hans");
+		});
+	});
+
+	describe("mapEntities(head, tail)", function()
+	{
+		it("creates a relationship from the head entity to the tail", function()
+		{
+			var mapping = db.mapEntities(entityTableId, nameTableId);
+
+			expect(entityMapTable({
+				id: mapping.id,
+				head: mapping.head,
+				tail: mapping.tail
+			}).count()).to.equal(1);
+			expect(entityTable({ id: mapping.id }).count()).to.equal(1);
 		});
 	});
 });
