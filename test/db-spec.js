@@ -6,7 +6,9 @@ var expect = chai.expect;
 var taffy = require("taffydb").taffy;
 var dbData = require("./data/test-db.json");
 
-var db = require("../lib/db").build( );
+var dbModule = require("../lib/db");
+var tables = dbModule.buildTables(dbData);
+var db = dbModule.build(tables);
 
 describe("db", function()
 {
@@ -111,7 +113,7 @@ describe("db", function()
 			var entities = db.getEntitiesByName("entity");
 
 			expect(entities.length).to.equal(1);
-			expect(entities[0]).to.equal({ id: entityTableId });
+			expect(entities[0]).to.have.property("id", entityTableId);
 		});
 	});
 });
