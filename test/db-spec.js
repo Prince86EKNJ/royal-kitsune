@@ -3,8 +3,10 @@ var expect = chai.expect;
 
 //var storage = require("dom-storage");
 //global.localStorage = new storage("./test/test-db.json", { strict: false, ws: "  " });
+var taffy = require("taffydb").taffy;
+var dbData = require("./data/test-db.json");
 
-var db = require("../lib/db")();
+var db = require("../lib/db").build( );
 
 describe("db", function()
 {
@@ -99,6 +101,17 @@ describe("db", function()
 				tail: mapping.tail
 			}).count()).to.equal(1);
 			expect(entityTable({ id: mapping.id }).count()).to.equal(1);
+		});
+	});
+
+	describe("getEntitiesByName(name)", function()
+	{
+		it("returns all entities that have a mapping to the given name", function()
+		{
+			var entities = db.getEntitiesByName("entity");
+
+			expect(entities.length).to.equal(1);
+			expect(entities[0]).to.equal({ id: entityTableId });
 		});
 	});
 });

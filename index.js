@@ -1,18 +1,17 @@
-var storage = require("dom-storage");
-global.localStorage = new storage("./data/db.json", { strict: false, ws: "  " });
-
 var repl = require("repl");
 var vm = require("vm");
 
-var db = require("./lib/db")();
 var _ = require("./lib/royal-lodash");
+var taffy = require("taffydb").taffy;
+var db = require("./lib/db")("./data/db.json");
 
 // Assemble exports
 var exports =
 {
 	db: db,
 	t: db.tables,
-	lodash: _
+	lodash: _,
+	taffy: taffy
 };
 
 var hasMacro = function(cmd)
