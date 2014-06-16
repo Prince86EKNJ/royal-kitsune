@@ -1,14 +1,8 @@
 var chai = require("chai");
 var expect = chai.expect;
 
-//var storage = require("dom-storage");
-//global.localStorage = new storage("./test/test-db.json", { strict: false, ws: "  " });
-var taffy = require("taffydb").taffy;
 var dbData = require("./data/test-db.json");
-
-var dbModule = require("../lib/db");
-var tables = dbModule.buildTables(dbData);
-var db = dbModule.build(tables);
+var db = require("../lib/db").buildFromJson(dbData);
 
 describe("db", function()
 {

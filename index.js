@@ -4,6 +4,7 @@ var vm = require("vm");
 var _ = require("./lib/royal-lodash");
 var taffy = require("taffydb").taffy;
 var db = require("./lib/db")("./data/db.json");
+var foxShell = require("./lib/fox-shell")();
 
 // Assemble exports
 var exports =
@@ -14,25 +15,6 @@ var exports =
 	taffy: taffy
 };
 
-var hasMacro = function(cmd)
-{
-	return _.indexOf(cmd.trim(), "@") == 0;
-};
-
-var executeMacro = function(cmd, context, filename)
-{
-	var entities = context.db.getEntitiesByName(cmd);
-
-	// Populate "r"
-	context.r.named = entities;
-	context.r.first = entities[0];
-	context.r.id = context.r.first.id;
-	context.r.ids = _.pluck(entities, "id");
-	context.r.last = entities[entities.length-1];
-
-	return entities;
-};
-
 // Setup and Run REPL
 var evalFunc = function(cmd, context, filename, callback)
 {
@@ -41,10 +23,9 @@ var evalFunc = function(cmd, context, filename, callback)
 
 	try
 	{
-		if(hasMacro(cmd))
+		if(foxShell.hasMacro(cmd))
 		{
-			var cleanCmd = cmd.substring(1, cmd.length-1);
-			result = executeMacro(cleanCmd, context, filename);
+			result = foxShell.executeMacro(cmd, context);
 		}
 		else
 		{
