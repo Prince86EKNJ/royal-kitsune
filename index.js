@@ -4,13 +4,14 @@ var vm = require("vm");
 var _ = require("./lib/royal-lodash");
 var taffy = require("taffydb").taffy;
 var db = require("./lib/db")("./data/db.json");
-var foxShell = require("./lib/fox-shell")();
+var foxShell = require("./lib/fox-shell")(db);
 
 // Assemble exports
 var exports =
 {
 	db: db,
 	t: db.tables,
+	foxShell: foxShell,
 	lodash: _,
 	taffy: taffy
 };
@@ -25,6 +26,8 @@ var evalFunc = function(cmd, context, filename, callback)
 	{
 		if(foxShell.hasMacro(cmd))
 		{
+			//Remove trailing newline
+			cmd = cmd.substring(0, cmd.length-1);
 			result = foxShell.executeMacro(cmd, context);
 		}
 		else

@@ -2,7 +2,7 @@ var chai = require("chai");
 var expect = chai.expect;
 
 var dbData = require("./data/test-db.json");
-var db = require("../lib/db").buildFromJson(dbData);
+var db = require("../lib/db").buildFromData(dbData);
 
 describe("db", function()
 {

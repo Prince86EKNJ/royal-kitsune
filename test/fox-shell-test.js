@@ -2,7 +2,7 @@ var chai = require("chai");
 var expect = chai.expect;
 
 var dbData = require("./data/test-db.json");
-var db = require("../lib/db").buildFromJson(dbData);
+var db = require("../lib/db").buildFromData(dbData);
 
 var foxShell = require("../lib/fox-shell")(db);
 
@@ -12,10 +12,9 @@ describe("fox-shell", function()
 	{
 		it("executes macros against the database", function()
 		{
-			db.systemTables.name().get();
 			var result = foxShell.executeMacro("@name");
 
-			expect(result).to.equal([]);
+			expect(result[0].id).to.equal(db.tableIds.name);
 		});
 	});
 });
