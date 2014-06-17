@@ -1,1 +1,1 @@
-var foxRepl = require("../lib/fox-repl");
+var foxRepl = require("../lib/fox-repl")();

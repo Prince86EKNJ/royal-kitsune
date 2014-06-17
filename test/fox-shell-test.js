@@ -12,9 +12,13 @@ describe("fox-shell", function()
 	{
 		it("executes macros against the database", function()
 		{
-			var result = foxShell.executeMacro("@name");
+			var context = {};
 
+			var result = foxShell.executeMacro("@name", context);
 			expect(result[0].id).to.equal(db.tableIds.name);
+
+			result = foxShell.executeMacro("@missing", context);
+			expect(result.length).to.equal(0);
 		});
 	});
 });
