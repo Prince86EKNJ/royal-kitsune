@@ -2,20 +2,33 @@ var chai = require("chai");
 var expect = chai.expect;
 
 var dbData = require("./data/test-db.json");
-var db = require("../lib/db").buildFromData(dbData);
 
 describe("db", function()
 {
-	var entityTableId = db.tableIds.entity;
-	var entityTable = db.getTable(entityTableId);
+	var db;
 
-	var entityMapTableId = db.tableIds.entityMap;
-	var entityMapTable = db.getTable(entityMapTableId);
+	var entityTableId;
+	var entityTable;
 
-	var nameTableId = db.tableIds.name;
-	var nameTable = db.getTable(nameTableId);
+	var entityMapTableId;
+	var entityMapTable;
 
-	// TODO: Reset database before every test
+	var nameTableId;
+	var nameTable;
+
+	before(function()
+	{
+		db = require("../lib/db").buildFromData(dbData);
+
+		entityTableId = db.tableIds.entity;
+		entityTable = db.getTable(entityTableId);
+
+		entityMapTableId = db.tableIds.entityMap;
+		entityMapTable = db.getTable(entityMapTableId);
+
+		nameTableId = db.tableIds.name;
+		nameTable = db.getTable(nameTableId);
+	});
 
 	describe("getTable(tableId)", function()
 	{
