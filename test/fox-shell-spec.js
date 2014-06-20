@@ -14,10 +14,10 @@ describe("fox-shell", function()
 		{
 			var context = {};
 
-			var result = foxShell.executeMacro("@name", context);
+			var result = foxShell.executeMacro("name", context);
 			expect(result[0].id).to.equal(db.tableIds.name);
 
-			result = foxShell.executeMacro("@missing", context);
+			result = foxShell.executeMacro("missing", context);
 			expect(result.length).to.equal(0);
 		});
 	});
