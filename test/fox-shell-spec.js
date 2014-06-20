@@ -8,16 +8,16 @@ var foxShell = require("../lib/fox-shell")(db);
 
 describe("fox-shell", function()
 {
-	describe("executeMacro(cmd, context)", function()
+	describe("eval(cmd, context)", function()
 	{
 		it("executes macros against the database", function()
 		{
 			var context = {};
 
-			var result = foxShell.executeMacro("name", context);
+			var result = foxShell.eval("name", context);
 			expect(result[0].id).to.equal(db.tableIds.name);
 
-			result = foxShell.executeMacro("missing", context);
+			result = foxShell.eval("missing", context);
 			expect(result.length).to.equal(0);
 		});
 	});

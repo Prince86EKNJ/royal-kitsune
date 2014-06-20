@@ -8,6 +8,14 @@ var foxRepl = require("../lib/fox-repl")(null, { msg: "Hello" });
 
 describe("fox-repl", function()
 {
+	describe("eval(cmd, context, filename, callback)", function()
+	{
+		it("hands commands to the fox shell and default repl", function()
+		{
+			throw "fail";
+		});
+	});
+
 	describe("start()", function()
 	{
 		it("starts the fox shell", function()
@@ -26,10 +34,6 @@ describe("fox-repl", function()
 				output: outStream,
 				terminal: true
 			});
-
-			replSession.eval(":name", null, null, function() {});
-			replSession.eval(".exit");
-
 			replSession.rli.close();
 
 			expect(replSession).to.not.be.undefined;
