@@ -51,7 +51,7 @@ describe("db", function()
 		});
 	});
 
-	describe("insertEntity(typeId)", function()
+	describe("insertEntity(typeId, name)", function()
 	{
 		it("creates a new record in the entity table with a given " +
 			"type and returns it", function()
@@ -62,6 +62,15 @@ describe("db", function()
 			expect(entity.id).to.match(/[a-f0-9]{40}/);
 			expect(entity.type).to.equal(nameTableId);
 			expect(recordCount).to.equal(1);
+		});
+
+		it("optionally binds a name to the newly inserted entity", function()
+		{
+			var entity = db.insertEntity(entityTableId, "myEntity");
+
+			var results = db.getEntitiesByName("myEntity");
+			expect(results.length).to.equal(1);
+			expect(results[0].id).to.equal(entity.id);
 		});
 	});
 
