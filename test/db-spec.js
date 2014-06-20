@@ -85,6 +85,15 @@ describe("db", function()
 			expect(entityTable({ id: data.id }).count()).to.equal(1);
 			expect(nameTable({ id: data.id, name: "rose" }).count()).to.equal(1);
 		});
+
+		it("optionally binds a name to the newly inserted entity", function()
+		{
+			var data = db.insertEntityWithData(nameTableId, { name: "rose" }, "rose name");
+
+			var results = db.getEntitiesByName("rose name");
+			expect(results.length).to.equal(1);
+			expect(results[0].id).to.equal(data.id);
+		});
 	});
 
 	describe("getOrInsertName(name)", function()
