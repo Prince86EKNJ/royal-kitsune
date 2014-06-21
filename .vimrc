@@ -1,4 +1,4 @@
-command! SaveAndExecute wall | !node index.js
+command! SaveAndExecute wall | !node kitsune.js
 noremap \x :SaveAndExecute<CR>
 
 command! SaveAndRunTests wall | !npm test
