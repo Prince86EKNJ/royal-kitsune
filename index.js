@@ -1,6 +1,8 @@
+var dataFile = process.argv[2] || "./data/db.json";
+
 var _ = require("./lib/royal-lodash");
 var taffy = require("taffydb").taffy;
-var db = require("./lib/db")("./data/db.json");
+var db = require("./lib/db")(dataFile);
 var foxShell = require("./lib/fox-shell")(db);
 
 // Assemble exports
