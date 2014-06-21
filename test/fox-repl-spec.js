@@ -39,8 +39,7 @@ describe("fox-repl", function()
 			expect(evalResult).to.equal(20);
 
 			foxRepl.eval("#name", context, null, callback);
-			expect(evalResult.length).to.equal(1);
-			expect(evalResult[0].id).to.equal(db.tableIds.name);
+			expect(evalResult).to.equal(db.tableIds.name);
 		});
 	});
 

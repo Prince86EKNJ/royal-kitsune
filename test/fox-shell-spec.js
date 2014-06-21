@@ -15,10 +15,10 @@ describe("fox-shell", function()
 			var context = {};
 
 			var result = foxShell.eval("name", context);
-			expect(result[0].id).to.equal(db.tableIds.name);
+			expect(result).to.equal(db.tableIds.name);
 
 			result = foxShell.eval("missing", context);
-			expect(result.length).to.equal(0);
+			expect(result).to.equal(null);
 		});
 	});
 });
