@@ -12,7 +12,18 @@ describe("fox-repl", function()
 	{
 		it("hands commands to the fox shell and default repl", function()
 		{
-			throw "fail";
+			var evalResult = null;
+			foxRepl.eval("(7 + 13)", global, null, function(err, result)
+			{
+				if(err != null)
+				{
+					throw err;
+				}
+
+				console.log(result);
+				evalResult = result;
+			});
+			expect(evalResult).to.equal(20);
 		});
 	});
 
