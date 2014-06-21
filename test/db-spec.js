@@ -2,6 +2,7 @@ var chai = require("chai");
 var expect = chai.expect;
 
 var dbData = require("./data/test-db.json");
+var dbModule = require("../lib/db");
 
 describe("db", function()
 {
@@ -18,7 +19,7 @@ describe("db", function()
 
 	before(function()
 	{
-		db = require("../lib/db").buildFromData(dbData);
+		db = dbModule.buildFromData(dbData);
 
 		entityTableId = db.tableIds.entity;
 		entityTable = db.getTable(entityTableId);
@@ -113,6 +114,16 @@ describe("db", function()
 
 			expect(nameResults.length).to.equal(0);
 			expect(newName.name).to.equal("hans");
+		});
+
+		it("throws an exception is there is more than one entry " +
+			"for the given name", function()
+		{
+			db.insertName("entityMap");
+			expect(function()
+			{
+				db.getName("entityMap");
+			}).to.throw(Error);
 		});
 	});
 
