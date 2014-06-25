@@ -1,28 +1,27 @@
 {
-	"name": "royal-kitsine",
-	"version": "0.0.1",
-	"description": "Code Generation Language/Framework",
-	"author": "Edward Nicholes Jr. <Prince86EKNJ@gmail.com>",
-	"repository":
-	{
-		"type": "git",
-		"url": "https://github.com/Prince86EKNJ/royal-kitsune.git"
-
-	},
-	"scripts":
-	{
-		"test": "mocha -R spec"
-	},
-	"dependencies":
-	{
-		"dom-storage": "2.0.1",
-		"lodash": "2.4.1",
-		"taffydb": "2.7.2"
-	},
-	"devDependencies":
-	{
-		"chai": "1.9.1",
-		"istanbul": "0.2.11",
-		"mocha": "1.20.1"
-	}
+  "name": "royal-kitsune",
+  "version": "0.0.1",
+  "description": "Code Generation Language/Framework",
+  "author": "Edward Nicholes Jr. <Prince86EKNJ@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Prince86EKNJ/royal-kitsune.git"
+  },
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "dependencies": {
+    "dom-storage": "2.0.1",
+    "lodash": "2.4.1",
+    "taffydb": "2.7.2"
+  },
+  "devDependencies": {
+    "chai": "1.9.1",
+    "istanbul": "0.2.11",
+    "mocha": "1.20.1"
+  },
+  "bugs": {
+    "url": "https://github.com/Prince86EKNJ/royal-kitsune/issues"
+  },
+  "homepage": "https://github.com/Prince86EKNJ/royal-kitsune"
 }
