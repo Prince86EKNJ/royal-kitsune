@@ -8,7 +8,8 @@
     "url": "https://github.com/Prince86EKNJ/royal-kitsune.git"
   },
   "scripts": {
-    "test": "mocha -R spec"
+    "test": "mocha -R spec",
+    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha"
   },
   "dependencies": {
     "dom-storage": "2.0.1",
