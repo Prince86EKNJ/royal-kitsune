@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "dom-storage": "2.0.1",
-    "gaze": "^0.6.4",
+    "gaze": "^0.5.1",
     "lodash": "2.4.1",
     "taffydb": "2.7.2",
     "ws": "^0.5.0"
